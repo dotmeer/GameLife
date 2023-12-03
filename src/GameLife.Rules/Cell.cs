@@ -31,17 +31,16 @@ public class Cell
             case CellState.Dead:
                 if (aliveNeighborsCount == 3)
                 {
-                    _nextState = CellState.New;
+                    _nextState = CellState.Alive;
                 }
                 break;
 
-            case CellState.New:
             case CellState.Alive:
                 if (aliveNeighborsCount < 2 || aliveNeighborsCount > 3)
                 {
                     _nextState = CellState.Dead;
                 }
-                else if (State == CellState.New)
+                else if (State == CellState.Alive)
                 {
                     _nextState = CellState.Alive;
                 }

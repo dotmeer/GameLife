@@ -10,15 +10,14 @@ public class Field
 
     private readonly Cell[,] _cells;
 
-    public bool Initialized { get; private set; }
-
     public Field(int width, int height)
     {
         Width = width;
         Height = height;
         _random = new Random();
-        Initialized = false;
         _cells = new Cell[width, height];
+
+        Initialize();
     }
 
     public void ExecuteTurn()
@@ -47,7 +46,7 @@ public class Field
             : null;
     }
 
-    public void Initialize()
+    private void Initialize()
     {
         for (var i = 0; i < Width; i++)
         {
@@ -64,15 +63,13 @@ public class Field
                 _cells[i, j].InitNeighbors(GetNeighbors(i, j));
             }
         }
-
-        Initialized = true;
     }
 
     private CellState GetInitialState()
     {
         return _random.Next(0, 100) >= 25
             ? CellState.Dead
-            : CellState.New;
+            : CellState.Alive;
     }
 
     private IReadOnlyCollection<Cell> GetNeighbors(int x, int y)

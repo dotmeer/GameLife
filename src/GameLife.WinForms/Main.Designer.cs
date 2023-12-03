@@ -33,15 +33,17 @@ namespace GameLife.WinForms
             StartButton = new Button();
             pictureBox = new PictureBox();
             StopButton = new Button();
-            StepButton = new Button();
+            IterationsLabel = new Label();
+            ScaleComboBox = new ComboBox();
+            ScaleLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
             // 
             // StartButton
             // 
-            StartButton.Location = new Point(2, 3);
+            StartButton.Location = new Point(1009, 3);
             StartButton.Name = "StartButton";
-            StartButton.Size = new Size(75, 23);
+            StartButton.Size = new Size(120, 30);
             StartButton.TabIndex = 0;
             StartButton.Text = "Start";
             StartButton.UseVisualStyleBackColor = true;
@@ -49,7 +51,7 @@ namespace GameLife.WinForms
             // 
             // pictureBox
             // 
-            pictureBox.Location = new Point(2, 32);
+            pictureBox.Location = new Point(3, 3);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(1000, 1000);
             pictureBox.TabIndex = 1;
@@ -57,30 +59,48 @@ namespace GameLife.WinForms
             // 
             // StopButton
             // 
-            StopButton.Location = new Point(83, 3);
+            StopButton.Location = new Point(1009, 39);
             StopButton.Name = "StopButton";
-            StopButton.Size = new Size(75, 23);
+            StopButton.Size = new Size(120, 30);
             StopButton.TabIndex = 2;
             StopButton.Text = "Stop";
             StopButton.UseVisualStyleBackColor = true;
             StopButton.Click += StopButtonClick;
             // 
-            // StepButton
+            // IterationsLabel
             // 
-            StepButton.Location = new Point(164, 3);
-            StepButton.Name = "StepButton";
-            StepButton.Size = new Size(75, 23);
-            StepButton.TabIndex = 3;
-            StepButton.Text = "Step";
-            StepButton.UseVisualStyleBackColor = true;
-            StepButton.Click += StepButton_Click;
+            IterationsLabel.Location = new Point(1009, 72);
+            IterationsLabel.Name = "IterationsLabel";
+            IterationsLabel.Size = new Size(120, 30);
+            IterationsLabel.TabIndex = 3;
+            // 
+            // ScaleComboBox
+            // 
+            ScaleComboBox.FormattingEnabled = true;
+            ScaleComboBox.Items.AddRange(new object[] { "1", "2", "4", "5", "10" });
+            ScaleComboBox.Location = new Point(1009, 135);
+            ScaleComboBox.Name = "ScaleComboBox";
+            ScaleComboBox.Size = new Size(120, 23);
+            ScaleComboBox.TabIndex = 4;
+            ScaleComboBox.Text = "5";
+            ScaleComboBox.SelectedIndexChanged += ScaleComboBox_SelectedIndexChanged;
+            // 
+            // ScaleLabel
+            // 
+            ScaleLabel.Location = new Point(1009, 102);
+            ScaleLabel.Name = "ScaleLabel";
+            ScaleLabel.Size = new Size(120, 30);
+            ScaleLabel.TabIndex = 5;
+            ScaleLabel.Text = "Масштаб";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1006, 1036);
-            Controls.Add(StepButton);
+            ClientSize = new Size(1134, 1011);
+            Controls.Add(ScaleLabel);
+            Controls.Add(ScaleComboBox);
+            Controls.Add(IterationsLabel);
             Controls.Add(StopButton);
             Controls.Add(pictureBox);
             Controls.Add(StartButton);
@@ -100,6 +120,8 @@ namespace GameLife.WinForms
         private Button StartButton;
         private PictureBox pictureBox;
         private Button StopButton;
-        private Button StepButton;
+        private Label IterationsLabel;
+        private ComboBox ScaleComboBox;
+        private Label ScaleLabel;
     }
 }

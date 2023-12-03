@@ -2,23 +2,22 @@ using GameLife.Rules;
 
 namespace GameLife.WinForms
 {
-    // TODO: счетчик итераций
-    // TODO: кнопки управления, дропбоксы для настройки
-    // TODO: стандартный набор правил + набор правил для нескольких разноцветных групп и их соревнования - дропбокс
+    // TODO: СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РЅР°Р±РѕСЂ РїСЂР°РІРёР» + РЅР°Р±РѕСЂ РїСЂР°РІРёР» РґР»СЏ РЅРµСЃРєРѕР»СЊРєРёС… СЂР°Р·РЅРѕС†РІРµС‚РЅС‹С… РіСЂСѓРїРї Рё РёС… СЃРѕСЂРµРІРЅРѕРІР°РЅРёСЏ - РґСЂРѕРїР±РѕРєСЃ
     // TODO: unit-tests
     public partial class Main : Form
     {
         private bool _run;
         private Task? _runner;
         private readonly CancellationTokenSource _cancellationTokenSource;
-        private readonly Field _field;
-        private readonly int _scale;
-
+        private Field _field;
+        private int _scale;
+        private int _iterationsCount;
         public Main()
         {
             InitializeComponent();
+
             _run = false;
-            _scale = 10;
+            _scale = int.Parse(ScaleComboBox.Text);
             _cancellationTokenSource = new CancellationTokenSource();
             _field = new Field(pictureBox.Width / _scale, pictureBox.Height / _scale);
         }
@@ -31,12 +30,15 @@ namespace GameLife.WinForms
 
         private void StartButtonClick(object sender, EventArgs e)
         {
-            _field.Initialize();
+            ScaleComboBox.Enabled = false;
+            _field = new Field(pictureBox.Width / _scale, pictureBox.Height / _scale);
+            _iterationsCount = 0;
             _run = true;
         }
 
         private void StopButtonClick(object sender, EventArgs e)
         {
+            ScaleComboBox.Enabled = true;
             _run = false;
         }
 
@@ -47,6 +49,9 @@ namespace GameLife.WinForms
                 if (_run)
                 {
                     DrawField();
+
+                    _iterationsCount++;
+                    IterationsLabel.Text = $"РС‚РµСЂР°С†РёР№: {_iterationsCount}";
 
                     _field.ExecuteTurn();
                 }
@@ -67,7 +72,7 @@ namespace GameLife.WinForms
 
                     var i = x * _scale;
                     var j = y * _scale;
-                    
+
                     for (var k = 0; k < _scale; k++)
                     {
                         for (var l = 0; l < _scale; l++)
@@ -78,8 +83,7 @@ namespace GameLife.WinForms
                                 cell?.State switch
                                 {
                                     CellState.Dead => Color.Black,
-                                    CellState.New => Color.White,
-                                    CellState.Alive => Color.MediumSeaGreen,
+                                    CellState.Alive => Color.White,
                                     _ => Color.Red
                                 });
                         }
@@ -90,18 +94,9 @@ namespace GameLife.WinForms
             pictureBox.Image = bitmap;
         }
 
-        private void StepButton_Click(object sender, EventArgs e)
+        private void ScaleComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_field.Initialized)
-            {
-                _field.Initialize();
-            }
-            else
-            {
-                _field.ExecuteTurn();
-            }
-
-            DrawField();
+            _scale = int.Parse(ScaleComboBox.Text);
         }
     }
 }
