@@ -19,7 +19,9 @@ namespace GameLife.WinForms
             _run = false;
             _scale = int.Parse(ScaleComboBox.Text);
             _cancellationTokenSource = new CancellationTokenSource();
-            _field = new Field(pictureBox.Width / _scale, pictureBox.Height / _scale);
+            _field = FieldFactory.Create(
+                pictureBox.Width / _scale,
+                pictureBox.Height / _scale);
         }
 
         private async void Main_Load(object sender, EventArgs e)
@@ -31,7 +33,9 @@ namespace GameLife.WinForms
         private void StartButtonClick(object sender, EventArgs e)
         {
             ScaleComboBox.Enabled = false;
-            _field = new Field(pictureBox.Width / _scale, pictureBox.Height / _scale);
+            _field = FieldFactory.Create(
+                pictureBox.Width / _scale,
+                pictureBox.Height / _scale);
             _iterationsCount = 0;
             _run = true;
         }
@@ -84,7 +88,7 @@ namespace GameLife.WinForms
                                 {
                                     CellState.Dead => Color.Black,
                                     CellState.Alive => Color.White,
-                                    _ => Color.Red
+                                    _ => Color.DarkGray
                                 });
                         }
                     }

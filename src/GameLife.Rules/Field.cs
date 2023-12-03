@@ -6,18 +6,13 @@ public class Field
 
     public int Height { get; }
 
-    private readonly Random _random;
+    internal Cell[,] Cells { get; }
 
-    private readonly Cell[,] _cells;
-
-    public Field(int width, int height)
+    internal Field(int width, int height)
     {
         Width = width;
         Height = height;
-        _random = new Random();
-        _cells = new Cell[width, height];
-
-        Initialize();
+        Cells = new Cell[width, height];
     }
 
     public void ExecuteTurn()
@@ -26,7 +21,7 @@ public class Field
         {
             for (var j = 0; j < Height; j++)
             {
-                _cells[i, j].CalculateNexState();
+                Cells[i, j].CalculateNexState();
             }
         }
 
@@ -34,7 +29,7 @@ public class Field
         {
             for (var j = 0; j < Height; j++)
             {
-                _cells[i, j].UpdateState();
+                Cells[i, j].UpdateState();
             }
         }
     }
@@ -42,65 +37,9 @@ public class Field
     public Cell? GetCell(int x, int y)
     {
         return x >= 0 && x < Width && y >= 0 && y < Height
-            ? _cells[x, y]
+            ? Cells[x, y]
             : null;
     }
 
-    private void Initialize()
-    {
-        for (var i = 0; i < Width; i++)
-        {
-            for (var j = 0; j < Height; j++)
-            {
-                _cells[i, j] = new Cell(GetInitialState());
-            }
-        }
-        
-        for (var i = 0; i < Width; i++)
-        {
-            for (var j = 0; j < Height; j++)
-            {
-                _cells[i, j].InitNeighbors(GetNeighbors(i, j));
-            }
-        }
-    }
-
-    private CellState GetInitialState()
-    {
-        return _random.Next(0, 100) >= 25
-            ? CellState.Dead
-            : CellState.Alive;
-    }
-
-    private IReadOnlyCollection<Cell> GetNeighbors(int x, int y)
-    {
-        var result = new List<Cell>();
-
-        var leftX = x - 1 < 0
-            ? Width - 1
-            : x - 1;
-
-        var rightX = x + 1 == Width
-            ? 0
-            : x + 1;
-
-        var topY = y - 1 < 0
-            ? Height - 1
-            : y - 1;
-
-        var bottomY = y + 1 == Height
-            ? 0
-            : y + 1;
-
-        result.Add(_cells[leftX, topY]);
-        result.Add(_cells[leftX, y]);
-        result.Add(_cells[leftX, bottomY]);
-        result.Add(_cells[x, topY]);
-        result.Add(_cells[x, bottomY]);
-        result.Add(_cells[rightX, topY]);
-        result.Add(_cells[rightX, y]);
-        result.Add(_cells[rightX, bottomY]);
-
-        return result;
-    }
+    
 }
