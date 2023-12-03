@@ -1,5 +1,5 @@
 ﻿
-namespace GameLife
+namespace GameLife.WinForms
 {
     partial class Main
     {

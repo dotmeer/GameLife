@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace GameLife;
+﻿namespace GameLife.Rules;
 
 public class Field
 {
@@ -51,7 +49,6 @@ public class Field
 
     public void Initialize()
     {
-        // TODO: возможно, предустановленные формации или условия генерации из списка (dropbox)
         for (var i = 0; i < Width; i++)
         {
             for (var j = 0; j < Height; j++)
@@ -73,9 +70,7 @@ public class Field
 
     private CellState GetInitialState()
     {
-        // TODO: возможно, надо как-то регулировать частоту
-        var value = _random.Next(0, 100);
-        return value >= 25
+        return _random.Next(0, 100) >= 25
             ? CellState.Dead
             : CellState.New;
     }

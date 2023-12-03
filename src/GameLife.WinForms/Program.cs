@@ -1,4 +1,4 @@
-namespace GameLife
+namespace GameLife.WinForms
 {
     internal static class Program
     {
