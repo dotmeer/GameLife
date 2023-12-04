@@ -6,61 +6,69 @@ namespace GameLife.WinForms
     // TODO: unit-tests
     public partial class Main : Form
     {
-        private bool _run;
-        private Task? _runner;
         private readonly CancellationTokenSource _cancellationTokenSource;
-        private Field _field;
+        private bool _runSimulation;
+        private Field? _field;
         private int _scale;
         private int _iterationsCount;
+
         public Main()
         {
             InitializeComponent();
 
-            _run = false;
+            _runSimulation = false;
             _scale = int.Parse(ScaleComboBox.Text);
             _cancellationTokenSource = new CancellationTokenSource();
-            _field = FieldFactory.Create(
-                pictureBox.Width / _scale,
-                pictureBox.Height / _scale);
         }
 
         private async void Main_Load(object sender, EventArgs e)
         {
-            _runner = Run();
-            await _runner;
+            await Run();
         }
 
-        private void StartButtonClick(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
             ScaleComboBox.Enabled = false;
+
             _field = FieldFactory.Create(
                 pictureBox.Width / _scale,
                 pictureBox.Height / _scale);
+            
             _iterationsCount = 0;
-            _run = true;
+            _runSimulation = true;
         }
 
-        private void StopButtonClick(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
+            _field = null;
             ScaleComboBox.Enabled = true;
-            _run = false;
+            _runSimulation = false;
+        }
+
+        private void ScaleComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _scale = int.Parse(ScaleComboBox.Text);
         }
 
         private async Task Run()
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
-                if (_run)
+                if (_runSimulation)
                 {
                     DrawField();
 
                     _iterationsCount++;
                     IterationsLabel.Text = $"Итераций: {_iterationsCount}";
 
-                    _field.ExecuteTurn();
-                }
+                    _field?.ExecuteTurn();
 
-                await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                }
+                else
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(1000));
+                }
             }
         }
 
@@ -68,7 +76,7 @@ namespace GameLife.WinForms
         {
             var bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
 
-            for (var x = 0; x < _field.Width; x++)
+            for (var x = 0; x < _field!.Width; x++)
             {
                 for (var y = 0; y < _field.Height; y++)
                 {
@@ -96,11 +104,6 @@ namespace GameLife.WinForms
             }
 
             pictureBox.Image = bitmap;
-        }
-
-        private void ScaleComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _scale = int.Parse(ScaleComboBox.Text);
         }
     }
 }

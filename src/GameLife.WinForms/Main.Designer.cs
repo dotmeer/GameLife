@@ -35,8 +35,9 @@ namespace GameLife.WinForms
             StopButton = new Button();
             IterationsLabel = new Label();
             ScaleComboBox = new ComboBox();
-            ScaleLabel = new Label();
+            ScaleGroupBox = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
+            ScaleGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // StartButton
@@ -47,7 +48,7 @@ namespace GameLife.WinForms
             StartButton.TabIndex = 0;
             StartButton.Text = "Start";
             StartButton.UseVisualStyleBackColor = true;
-            StartButton.Click += StartButtonClick;
+            StartButton.Click += StartButton_Click;
             // 
             // pictureBox
             // 
@@ -65,7 +66,7 @@ namespace GameLife.WinForms
             StopButton.TabIndex = 2;
             StopButton.Text = "Stop";
             StopButton.UseVisualStyleBackColor = true;
-            StopButton.Click += StopButtonClick;
+            StopButton.Click += StopButton_Click;
             // 
             // IterationsLabel
             // 
@@ -73,33 +74,35 @@ namespace GameLife.WinForms
             IterationsLabel.Name = "IterationsLabel";
             IterationsLabel.Size = new Size(120, 30);
             IterationsLabel.TabIndex = 3;
+            IterationsLabel.Text = "Итераций: 0";
             // 
             // ScaleComboBox
             // 
             ScaleComboBox.FormattingEnabled = true;
             ScaleComboBox.Items.AddRange(new object[] { "1", "2", "4", "5", "10" });
-            ScaleComboBox.Location = new Point(1009, 135);
+            ScaleComboBox.Location = new Point(6, 22);
             ScaleComboBox.Name = "ScaleComboBox";
-            ScaleComboBox.Size = new Size(120, 23);
+            ScaleComboBox.Size = new Size(105, 23);
             ScaleComboBox.TabIndex = 4;
             ScaleComboBox.Text = "5";
             ScaleComboBox.SelectedIndexChanged += ScaleComboBox_SelectedIndexChanged;
             // 
-            // ScaleLabel
+            // ScaleGroupBox
             // 
-            ScaleLabel.Location = new Point(1009, 102);
-            ScaleLabel.Name = "ScaleLabel";
-            ScaleLabel.Size = new Size(120, 30);
-            ScaleLabel.TabIndex = 5;
-            ScaleLabel.Text = "Масштаб";
+            ScaleGroupBox.Controls.Add(ScaleComboBox);
+            ScaleGroupBox.Location = new Point(1011, 105);
+            ScaleGroupBox.Name = "ScaleGroupBox";
+            ScaleGroupBox.Size = new Size(118, 59);
+            ScaleGroupBox.TabIndex = 6;
+            ScaleGroupBox.TabStop = false;
+            ScaleGroupBox.Text = "Масштаб";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1134, 1011);
-            Controls.Add(ScaleLabel);
-            Controls.Add(ScaleComboBox);
+            Controls.Add(ScaleGroupBox);
             Controls.Add(IterationsLabel);
             Controls.Add(StopButton);
             Controls.Add(pictureBox);
@@ -112,6 +115,7 @@ namespace GameLife.WinForms
             Text = "Main";
             Load += Main_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
+            ScaleGroupBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -122,6 +126,6 @@ namespace GameLife.WinForms
         private Button StopButton;
         private Label IterationsLabel;
         private ComboBox ScaleComboBox;
-        private Label ScaleLabel;
+        private GroupBox ScaleGroupBox;
     }
 }
