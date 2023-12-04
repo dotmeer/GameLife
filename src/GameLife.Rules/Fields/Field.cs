@@ -1,5 +1,9 @@
-﻿namespace GameLife.Rules;
+﻿using GameLife.Rules.Cells;
+using GameLife.Rules.Rules;
 
+namespace GameLife.Rules.Fields;
+
+// TODO: unit-tests для правил
 public class Field
 {
     public int Width { get; }
@@ -8,11 +12,14 @@ public class Field
 
     internal Cell[,] Cells { get; }
 
-    internal Field(int width, int height)
+    private readonly IRule _rule;
+
+    internal Field(int width, int height, IRule rule)
     {
         Width = width;
         Height = height;
         Cells = new Cell[width, height];
+        _rule = rule;
     }
 
     public void ExecuteTurn()
@@ -21,7 +28,8 @@ public class Field
         {
             for (var j = 0; j < Height; j++)
             {
-                Cells[i, j].CalculateNexState();
+                Cells[i, j].SetNextState(
+                    _rule.CalculateNextState(Cells[i, j]));
             }
         }
 
@@ -40,6 +48,4 @@ public class Field
             ? Cells[x, y]
             : null;
     }
-
-    
 }

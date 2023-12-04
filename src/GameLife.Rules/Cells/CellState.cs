@@ -1,4 +1,4 @@
-﻿namespace GameLife.Rules;
+﻿namespace GameLife.Rules.Cells;
 
 public enum CellState
 {

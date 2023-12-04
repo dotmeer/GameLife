@@ -1,9 +1,9 @@
-using GameLife.Rules;
+using GameLife.Rules.Cells;
+using GameLife.Rules.Fields;
+using GameLife.Rules.Rules;
 
 namespace GameLife.WinForms
 {
-    // TODO: стандартный набор правил + набор правил для нескольких разноцветных групп и их соревнования - дропбокс
-    // TODO: unit-tests
     public partial class Main : Form
     {
         private readonly CancellationTokenSource _cancellationTokenSource;
@@ -32,7 +32,8 @@ namespace GameLife.WinForms
 
             _field = FieldFactory.Create(
                 pictureBox.Width / _scale,
-                pictureBox.Height / _scale);
+                pictureBox.Height / _scale,
+                RuleSet.Basic);
             
             _iterationsCount = 0;
             _runSimulation = true;

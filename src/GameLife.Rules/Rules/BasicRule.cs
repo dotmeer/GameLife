@@ -1,19 +1,13 @@
-﻿namespace GameLife.Rules;
+﻿using GameLife.Rules.Cells;
+using GameLife.Rules.Fields;
 
-public static class FieldFactory
+namespace GameLife.Rules.Rules;
+
+internal class BasicRule : IRule
 {
     private static readonly Random Random = new();
 
-    public static Field Create(int width, int height)
-    {
-        var field = new Field(width, height);
-
-        Initialize(field);
-
-        return field;
-    }
-
-    private static void Initialize(Field field)
+    public void Initialize(Field field)
     {
         for (var i = 0; i < field.Width; i++)
         {
@@ -30,6 +24,34 @@ public static class FieldFactory
                 field.Cells[i, j].InitNeighbors(GetNeighbors(field, i, j));
             }
         }
+    }
+
+    public CellState CalculateNextState(Cell cell)
+    {
+        if (cell.Neighbors is null)
+        {
+            throw new Exception("Нет информации о соседних клетках");
+        }
+
+        var aliveNeighborsCount = cell.Neighbors.Count(_ => _.State != CellState.Dead);
+        switch (cell.State)
+        {
+            case CellState.Dead:
+                if (aliveNeighborsCount == 3)
+                {
+                    return CellState.Alive;
+                }
+                break;
+
+            case CellState.Alive:
+                if (aliveNeighborsCount < 2 || aliveNeighborsCount > 3)
+                {
+                    return CellState.Dead;
+                }
+                break;
+        }
+
+        return cell.State;
     }
 
     private static CellState GetInitialState()
