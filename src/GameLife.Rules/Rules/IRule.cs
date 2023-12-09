@@ -3,9 +3,9 @@ using GameLife.Rules.Fields;
 
 namespace GameLife.Rules.Rules;
 
-public interface IRule
+internal interface IRule
 {
-    void Initialize(Field field);
+    void InitializeField(Field field);
 
     CellState CalculateNextState(Cell cell);
 }

@@ -42,10 +42,10 @@ public class Field
         }
     }
 
-    public Cell? GetCell(int x, int y)
+    public CellState? GetCellState(int x, int y)
     {
         return x >= 0 && x < Width && y >= 0 && y < Height
-            ? Cells[x, y]
+            ? Cells[x, y].State
             : null;
     }
 }

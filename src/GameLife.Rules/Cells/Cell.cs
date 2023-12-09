@@ -1,6 +1,6 @@
 ﻿namespace GameLife.Rules.Cells;
 
-public class Cell
+internal class Cell
 {
     public CellState State { get; private set; }
 

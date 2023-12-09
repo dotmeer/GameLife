@@ -7,7 +7,7 @@ internal class BasicRule : IRule
 {
     private static readonly Random Random = new();
 
-    public void Initialize(Field field)
+    public void InitializeField(Field field)
     {
         for (var i = 0; i < field.Width; i++)
         {

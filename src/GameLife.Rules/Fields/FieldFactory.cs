@@ -9,7 +9,7 @@ public static class FieldFactory
         var rule = GetRule(ruleSet);
         var field = new Field(width, height, rule);
 
-        rule.Initialize(field);
+        rule.InitializeField(field);
 
         return field;
     }

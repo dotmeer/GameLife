@@ -81,7 +81,7 @@ namespace GameLife.WinForms
             {
                 for (var y = 0; y < _field.Height; y++)
                 {
-                    var cell = _field.GetCell(x, y);
+                    var cellState = _field.GetCellState(x, y);
 
                     var i = x * _scale;
                     var j = y * _scale;
@@ -93,7 +93,7 @@ namespace GameLife.WinForms
                             bitmap.SetPixel(
                                 i + k,
                                 j + l,
-                                cell?.State switch
+                                cellState switch
                                 {
                                     CellState.Dead => Color.Black,
                                     CellState.Alive => Color.White,
