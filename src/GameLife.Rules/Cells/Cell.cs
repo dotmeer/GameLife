@@ -4,7 +4,7 @@ internal class Cell
 {
     public CellState State { get; private set; }
 
-    private CellState? _nextState;
+    internal CellState? NextState { get; private set; }
 
     internal IReadOnlyCollection<Cell>? Neighbors { get; private set; }
 
@@ -13,19 +13,19 @@ internal class Cell
         State = state;
     }
 
-    internal void InitNeighbors(IReadOnlyCollection<Cell>? neighbors)
+    internal void InitNeighbors(IReadOnlyCollection<Cell> neighbors)
     {
         Neighbors ??= neighbors;
     }
     
     internal void SetNextState(CellState state)
     {
-        _nextState = state;
+        NextState = state;
     }
 
     internal void UpdateState()
     {
-        State = _nextState ?? State;
-        _nextState = null;
+        State = NextState ?? State;
+        NextState = null;
     }
 }

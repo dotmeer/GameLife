@@ -3,7 +3,6 @@ using GameLife.Rules.Rules;
 
 namespace GameLife.Rules.Fields;
 
-// TODO: unit-tests для правил
 public class Field
 {
     public int Width { get; }

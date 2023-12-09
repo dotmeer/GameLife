@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLife.WinForms", "GameLife.WinForms\GameLife.WinForms.csproj", "{127758A8-B1EE-4060-9207-9F991F493B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLife.Rules", "GameLife.Rules\GameLife.Rules.csproj", "{037AD6B2-88DA-43BC-8F52-11CD38AA5926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLife.Rules", "GameLife.Rules\GameLife.Rules.csproj", "{037AD6B2-88DA-43BC-8F52-11CD38AA5926}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLife.Tests", "GameLife.Tests\GameLife.Tests.csproj", "{11CBC3FD-A6E2-4AEE-9680-6A86742ABB67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{037AD6B2-88DA-43BC-8F52-11CD38AA5926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{037AD6B2-88DA-43BC-8F52-11CD38AA5926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{037AD6B2-88DA-43BC-8F52-11CD38AA5926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11CBC3FD-A6E2-4AEE-9680-6A86742ABB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11CBC3FD-A6E2-4AEE-9680-6A86742ABB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11CBC3FD-A6E2-4AEE-9680-6A86742ABB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11CBC3FD-A6E2-4AEE-9680-6A86742ABB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,5 +2,7 @@
 
 public enum RuleSet
 {
+    Test,
+    
     Basic
 }

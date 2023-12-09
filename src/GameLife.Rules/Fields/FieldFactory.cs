@@ -19,6 +19,7 @@ public static class FieldFactory
         return ruleSet switch
         {
             RuleSet.Basic => new BasicRule(),
+            RuleSet.Test => new TestRule(),
             _ => new BasicRule()
         };
     }

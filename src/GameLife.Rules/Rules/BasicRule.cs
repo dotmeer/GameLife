@@ -33,7 +33,7 @@ internal class BasicRule : IRule
             throw new Exception("Нет информации о соседних клетках");
         }
 
-        var aliveNeighborsCount = cell.Neighbors.Count(_ => _.State != CellState.Dead);
+        var aliveNeighborsCount = cell.Neighbors.Count(_ => _.State == CellState.Alive);
         switch (cell.State)
         {
             case CellState.Dead:
